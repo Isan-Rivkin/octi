@@ -1,0 +1,18 @@
+{
+    "name": "a",
+    "version": "1.0.0",
+    "build_type": "Debug",
+    "dependencies": [
+      {
+        "name": "e",
+        "version" : "1.0.0",
+        "uri": "SOME LOCAL URL", 
+        "compiler_flags": ["-I", "--err"]
+      }
+    ],
+    "compiler_flags": [],
+    "package_type": "staticlib",
+    "include_directories": ["include"],
+    "src_directories": ["src"],
+    "src_files": []
+}

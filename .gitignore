@@ -1,3 +1,6 @@
+CMakeLists.txt
+config.h
+config.h.temp
 /target
 **/*.rs.bk
 

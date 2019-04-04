@@ -1,17 +1,9 @@
-// use manifest::Manifest;
+use crate::manifest::{Manifest, PackageType};
 use std::fs::File;
 use std::io::Write;
 use std::path::Path;
 use std::error::Error;
 use super::templates::*;
-
-#[derive(Debug)]
-pub struct Manifest {
-    name: String,
-    version: String,
-    compiler_flags: Vec<String>,
-    package_type: String,
-}
 
 #[derive(Debug)]
 pub struct CMakeGenerator<'a> {
@@ -47,13 +39,39 @@ impl<'a> CMakeGenerator<'a> {
     }
 
     fn add_cmake_target(&self, file: &mut File) -> Result<(), Box<Error>> {
-        let mut template = match self.manifest.package_type.as_str() {
-            "bin" => CMAKE_TARGET_BINARY_TEMPLATE,
-            _ => CMAKE_TARGET_LIBARY_TEMPLATE
-        };
+        let mut template = match self.manifest.package_type {
+            PackageType::bin => CMAKE_TARGET_BINARY_TEMPLATE,
+            PackageType::staticlib | PackageType::sharedlib => CMAKE_TARGET_LIBARY_TEMPLATE
+        }.to_string();
         
-        template.replace("#OCTI_PROJECT_NAME#", &self.manifest.name.as_str());
-        template.replace("#OCTI_PROJECT_INCLUDE_DIRS#", &self.manifest.)
+        template = template.replace("#OCTI_PROJECT_NAME#", &self.manifest.name.as_str());
+        template = template.replace("#OCTI_PROJECT_SOURCE_FILES#", &self.manifest.src_files.join("\n"));
+        template = template.replace("#OCTI_PROJECT_INCLUDE_DIRS#", &self.manifest.include_directories.join("\n"));
+        
+        match self.manifest.package_type {
+            PackageType::staticlib => { template = template.replace("#OCTI_LIB_TYPE#", "STATIC") },
+            PackageType::sharedlib => { template = template.replace("#OCTI_LIB_TYPE#", "SHARED") },
+            PackageType::bin => {}
+        }
+
+        file.write_all(template.as_bytes());
+
+        Ok(())
+    }
+
+    fn add_cmake_config(&self, file: &mut File) -> Result<(), Box<Error>> {
+        let mut template: String = CMAKE_CONFIG_TEMPLATE.to_string().clone();
+            
+        let mut in_config: String = self.output_path.clone();
+        let mut out_config: String = self.output_path.clone();
+
+        in_config.push_str("config.h.temp");
+        out_config.push_str("config.h");
+
+        template = template.replace("#OCTI_CONFIG_INPUT#", &in_config);
+        template = template.replace("#OCTI_CONFIG_OUTPUT#", &out_config);
+
+        file.write_all(template.as_bytes());
 
         Ok(())
     }
@@ -81,6 +99,7 @@ impl<'a> CMakeGenerator<'a> {
         self.add_cmake_meta(&mut file);
         self.add_cmake_compiler_flags(&mut file);
         self.add_cmake_target(&mut file);
+        self.add_cmake_config(&mut file);
 
         Ok(())
     }

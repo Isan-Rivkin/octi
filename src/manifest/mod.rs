@@ -53,6 +53,6 @@ mod test {
     use crate::manifest::{Manifest};
     #[test]
     fn test_load_manifest(){
-        let m = Manifest::new("MANIFEST_TEMPL.json");
+        let m = Manifest::new("MANIFEST_TEMPL.json").unwrap();
     }
 }

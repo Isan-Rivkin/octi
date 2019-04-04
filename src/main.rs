@@ -1,6 +1,6 @@
 mod manifest; 
-use manifest::test;
+use manifest::Manifest;
+use std::env;
+
 fn main() {
-    test();
-    println!("Hello, world!");
 }

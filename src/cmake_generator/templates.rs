@@ -1,6 +1,6 @@
 pub const CMAKE_TARGET_LIBARY_TEMPLATE: &str = r#"
     ADD_LIBRARY(#OCTI_PROJECT_NAME# 
-        #OCTI_PROJECT_FILES#
+        #OCTI_PROJECT_SOURCE_FILES#
     )
     TARGET_INCLUDE_DIRECTORIES(#OCTI_PROJECT_NAME#
         #OCTI_PROJECT_INCLUDE_DIRS#
@@ -49,7 +49,7 @@ public:
     static int major_version() { return @PROJECT_MAJOR_VERSION@; }
     static int minor_version() { return @PROJECT_MINOR_VERSION@; }
     static int patch_version() { return @PROJECT_PATCH_VERSION@; }
-    static char * patch() { return "@PROJECT_VERSION@"; }
+    static char * version() { return "@PROJECT_VERSION@"; }
     static char * name() { return "@PROJECT_NAME@"; }
 };
 

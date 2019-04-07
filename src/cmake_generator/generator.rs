@@ -44,7 +44,6 @@ impl<'a> CMakeGenerator<'a> {
             PackageType::staticlib | PackageType::sharedlib => CMAKE_TARGET_LIBARY_TEMPLATE
         }.to_string();
         
-        template = template.replace("#OCTI_PROJECT_NAME#", &self.manifest.name.as_str());
         template = template.replace("#OCTI_PROJECT_SOURCE_FILES#", &self.manifest.src_files.join("\n"));
         template = template.replace("#OCTI_PROJECT_INCLUDE_DIRS#", &self.manifest.include_directories.join("\n"));
         

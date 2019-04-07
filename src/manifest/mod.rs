@@ -1,9 +1,14 @@
+pub mod os_info;
+use os_info::{OsInfo};
+
 use serde::{Deserialize, Serialize};
 use uname; 
-use std::error::Error;
-use std::fs::File;
-use std::io::BufReader;
-use std::path::Path;
+use std::{
+    error::Error,
+    fs::File,
+    io::BufReader,
+    path::Path
+};
 
 #[derive( Deserialize,Serialize, Clone,Debug)]
 #[serde(rename = "build_type")]
@@ -27,25 +32,7 @@ pub struct Dependency{
     pub uri : String,
     pub compiler_flags : Vec<String>, 
 }
-#[derive(Debug,Clone)]
-pub struct OsInfo{
-    pub arch : String, 
-    pub os : String,
-}
-impl OsInfo{
-    pub fn new()->Self{
-        let info = uname::uname().unwrap();
-        OsInfo {
-         os : info.sysname, 
-         arch : info.machine,
-        }
-    }
-}
-impl Default for OsInfo {
-    fn default() -> Self { 
-        OsInfo::new()
-     }
-}
+
 
 #[derive( Deserialize,Serialize, Clone,Debug)]
 pub struct Manifest{
@@ -76,25 +63,11 @@ impl Manifest{
 
 #[cfg(test)]
 mod test {
-    use crate::manifest::{Manifest,OsInfo};
+    use crate::manifest::os_info::{OsInfo};
+    use crate::manifest::{Manifest};
     #[test]
     fn test_load_manifest(){
         let m = Manifest::new("./src/manifest/MANIFEST_TEMPL.json").unwrap();
         println!("{:?}",m);
-    }
-    #[test]
-    fn basic_os_detection(){
-        // if cfg!(windows) {
-        //     println!("this is windows");
-        // } else if cfg!(unix) {
-        //     println!("this is unix alike");
-        // }
-        // use uname;
-        // let info = uname::uname().unwrap();
-        // println!("{:?}",info);
-        // let sys_name = info.sysname; 
-        // let machine = info.machine; 
-        let i = OsInfo::new();
-        assert_eq!(String::from("Linux"), i.os);
     }
 }

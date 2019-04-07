@@ -1,4 +1,4 @@
-use crate::manifest::{Manifest, PackageType};
+use crate::parser::manifest::{Manifest, PackageType};
 use std::fs::File;
 use std::io::Write;
 use std::path::Path;

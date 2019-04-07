@@ -1,5 +1,4 @@
-pub mod os_info;
-use os_info::{OsInfo};
+use crate::parser::os_info::{OsInfo};
 
 use serde::{Deserialize, Serialize};
 use uname; 
@@ -57,17 +56,5 @@ impl Manifest{
     }
     fn set_os_info(&mut self){
         self.os_info = OsInfo::new();
-    }
-}
-
-
-#[cfg(test)]
-mod test {
-    use crate::manifest::os_info::{OsInfo};
-    use crate::manifest::{Manifest};
-    #[test]
-    fn test_load_manifest(){
-        let m = Manifest::new("./src/manifest/MANIFEST_TEMPL.json").unwrap();
-        println!("{:?}",m);
     }
 }

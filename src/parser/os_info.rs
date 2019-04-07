@@ -21,7 +21,7 @@ impl Default for OsInfo {
 
 #[cfg(test)]
 mod test {
-    use crate::manifest::os_info::{OsInfo};
+    use crate::parser::os_info::{OsInfo};
     #[test]
     fn basic_os_detection(){
         // if cfg!(windows) {

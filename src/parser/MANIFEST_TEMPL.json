@@ -1,7 +1,7 @@
 {
     "name": "a",
     "version": "1.0.0",
-    "build_type": "Debug",
+    "build_type": "debug",
     "dependencies": [
       {
         "name": "e",

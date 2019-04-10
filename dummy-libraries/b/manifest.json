@@ -3,7 +3,11 @@
     "version": "1.2.0",
     "build_type": "debug",
     "dependencies": [
-      "c"
+      {
+        "name": "c",
+        "version" : "1.2.0",
+        "uri": "SOME LOCAL URL"
+      }
     ],
     "compiler_flags": [],
     "package_type": "lib",

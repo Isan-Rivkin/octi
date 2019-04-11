@@ -12,8 +12,8 @@ use std::{
 #[derive( Deserialize,Serialize, Clone,Debug)]
 #[serde(rename = "build_type")]
 pub enum BuildType {
-    Debug, 
-    Release,
+    debug, 
+    release,
 }
 
 #[derive( Deserialize,Serialize, Clone,Debug)]
@@ -27,9 +27,9 @@ pub enum PackageType {
 #[derive( Deserialize,Serialize, Clone,Debug)]
 pub struct Dependency{
     pub name : String, 
-    pub version : String,
-    pub uri : String,
-    pub compiler_flags : Vec<String>, 
+    pub version : Option<String>,
+    pub uri : Option<String>,
+    pub compiler_flags : Option<Vec<String>>, 
 }
 
 

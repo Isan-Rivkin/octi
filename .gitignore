@@ -1,6 +1,7 @@
 CMakeLists.txt
 config.h
 config.h.temp
+octi-tests-ws
 /target
 **/*.rs.bk
 

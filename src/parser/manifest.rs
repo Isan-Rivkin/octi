@@ -57,4 +57,11 @@ impl Manifest{
     fn set_os_info(&mut self){
         self.os_info = OsInfo::new();
     }
+    /// append path to src files derived from src dirs 
+    pub fn add_src_files(&mut self,mut other_src_files : Vec<String>){
+        self.src_files.append(&mut other_src_files);
+    }
+    pub fn get_src_dirs(&self)-> &Vec<String>{
+        return &self.src_directories;
+    }
 }

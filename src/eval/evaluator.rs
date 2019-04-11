@@ -12,8 +12,9 @@ impl<'a> Evaluator<'a> {
             manifest : manifest
         }
     }
+    /// add all the src files with valid extensions to the manifest
+    /// default is src folder 
     pub fn expand_src_files(&mut self)->Result<bool,()>{
-        
         Ok(true)
     }   
 }

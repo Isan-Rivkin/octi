@@ -31,7 +31,16 @@ pub struct Dependency{
     pub uri : Option<String>,
     pub compiler_flags : Option<Vec<String>>, 
 }
-
+impl Default for Dependency {
+    fn default() -> Self { 
+        Dependency {
+            name : String::from(""),
+            version : None, 
+            uri : None, 
+            compiler_flags : None, 
+        }
+     }
+}
 
 #[derive( Deserialize,Serialize, Clone,Debug)]
 pub struct Manifest{
@@ -47,6 +56,24 @@ pub struct Manifest{
     #[serde(skip)]
     pub os_info : OsInfo,
 }
+
+impl Default for Manifest {
+    fn default() -> Self { 
+        Manifest {
+            name : String::from(""),
+            version : String::from(""), 
+            build_type : BuildType::debug,
+            package_type : PackageType::bin, 
+            compiler_flags : Vec::new(),
+            include_directories : Vec::new(),
+            src_directories : Vec::new(),
+            src_files : Vec::new(),
+            dependencies : Vec::new(),
+            os_info : OsInfo::default(),
+        }
+     }
+}
+
 impl Manifest{
     pub fn new<P: AsRef<Path>>(path: P) -> Result<Self, Box<Error>> {
         let file = File::open(path)?;

@@ -35,7 +35,11 @@ impl Downloader for LocalDL{
     }
 
     fn download_manifest<P: AsRef<Path>>(m : &Manifest, target_path : P)->Result<Vec<WorkspaceSrc>,()>{
-        // get all deps 
+        // get all deps
+        let mut deps : Vec<Dependency> = Vec::new();
+        for d in m.get_dependencies(){
+            deps.push(d.clone());
+        }
         // for each deps get all deps 
         // move dep to target 
         // finally, move main manifest project to target 

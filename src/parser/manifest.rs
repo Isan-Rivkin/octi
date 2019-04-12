@@ -94,4 +94,7 @@ impl Manifest{
     pub fn get_src_files(&self)-> &Vec<String>{
         return &self.src_files;
     }
+    pub fn get_dependencies(&self)-> &Vec<Dependency>{
+        return &self.dependencies; 
+    }
 }

@@ -54,7 +54,7 @@ impl Manifest{
         let u : Manifest = serde_json::from_reader(reader)?;
         Ok(u)
     }
-    fn set_os_info(&mut self){
+    fn set_os_info(&mut self){  
         self.os_info = OsInfo::new();
     }
     /// append path to src files derived from src dirs 
@@ -63,5 +63,8 @@ impl Manifest{
     }
     pub fn get_src_dirs(&self)-> &Vec<String>{
         return &self.src_directories;
+    }
+    pub fn get_src_files(&self)-> &Vec<String>{
+        return &self.src_files;
     }
 }

@@ -1,0 +1,13 @@
+{
+  "name": "a",
+  "version": "1.0.0",
+  "build_type": "debug",
+  "dependencies": [
+    "b"
+  ],
+  "compiler_flags": [],
+  "package_type": "bin",
+  "include_directories": ["include"],
+  "src_directories": ["src"],
+  "src_files": []
+}

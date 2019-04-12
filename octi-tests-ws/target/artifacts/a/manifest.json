@@ -1,0 +1,17 @@
+{
+  "name": "a",
+  "version": "1.0.0",
+  "build_type": "debug",
+  "dependencies": [
+    {
+      "name": "b",
+      "version" : "1.2.0",
+      "uri": "SOME LOCAL URL"
+    }
+  ],
+  "compiler_flags": [],
+  "package_type": "bin",
+  "include_directories": ["include"],
+  "src_directories": ["src"],
+  "src_files": []
+}
